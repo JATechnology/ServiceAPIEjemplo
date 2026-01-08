@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmpleadoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cat_Roles">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InfoEmpleado">
+          <Key>
+            <PropertyRef Name="NoEmpleado" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoEmpleado" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Puesto" Type="varchar" MaxLength="25" />
+          <Property Name="Rol" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="30" />
+          <Property Name="pass" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_InfoEmpleado_Cat_Roles">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="InfoEmpleado" Type="Self.InfoEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="InfoEmpleado">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="noempleado" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="puesto" Type="varchar" Mode="In" />
+          <Parameter Name="rol" Type="int" Mode="In" />
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="contraseña" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EmpleadoModelStoreContainer">
+          <EntitySet Name="Cat_Roles" EntityType="Self.Cat_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoEmpleado" EntityType="Self.InfoEmpleado" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InfoEmpleado_Cat_Roles" Association="Self.FK_InfoEmpleado_Cat_Roles">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="InfoEmpleado" EntitySet="InfoEmpleado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpleadoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cat_Roles">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="RowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InfoEmpleadoes" Relationship="Self.FK_InfoEmpleado_Cat_Roles" FromRole="Cat_Roles" ToRole="InfoEmpleado" />
+        </EntityType>
+        <EntityType Name="InfoEmpleado">
+          <Key>
+            <PropertyRef Name="NoEmpleado" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cat_Roles" Relationship="Self.FK_InfoEmpleado_Cat_Roles" FromRole="InfoEmpleado" ToRole="Cat_Roles" />
+          <Property Name="pass" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_InfoEmpleado_Cat_Roles">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="InfoEmpleado" Type="Self.InfoEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="InfoEmpleado">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpleadoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cat_Roles" EntityType="Self.Cat_Roles" />
+          <EntitySet Name="InfoEmpleadoes" EntityType="Self.InfoEmpleado" />
+          <AssociationSet Name="FK_InfoEmpleado_Cat_Roles" Association="Self.FK_InfoEmpleado_Cat_Roles">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="InfoEmpleado" EntitySet="InfoEmpleadoes" />
+          </AssociationSet>
+          <FunctionImport Name="CreateUsuario">
+            <Parameter Name="noempleado" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="puesto" Mode="In" Type="String" />
+            <Parameter Name="rol" Mode="In" Type="Int32" />
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="contraseña" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmpleadoModelStoreContainer" CdmEntityContainer="EmpleadoEntities">
+          <EntitySetMapping Name="Cat_Roles">
+            <EntityTypeMapping TypeName="EmpleadoModel.Cat_Roles">
+              <MappingFragment StoreEntitySet="Cat_Roles">
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoEmpleadoes">
+            <EntityTypeMapping TypeName="EmpleadoModel.InfoEmpleado">
+              <MappingFragment StoreEntitySet="InfoEmpleado">
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="NoEmpleado" ColumnName="NoEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateUsuario" FunctionName="EmpleadoModel.Store.CreateUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

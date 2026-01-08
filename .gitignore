@@ -1,0 +1,64 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Visual Studio cache/options
+.vs/
+*.dbmdl
+*.jfm
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build results
+*.dll
+*.exe
+*.app
+*.apk
+*.aab
+
+# MAUI specific
+Platforms/Android/bin/
+Platforms/Android/obj/
+Platforms/iOS/bin/
+Platforms/iOS/obj/
+Platforms/MacCatalyst/bin/
+Platforms/MacCatalyst/obj/
+Platforms/Windows/bin/
+Platforms/Windows/obj/
+
+# Configuration files
+appsettings.*.json
+
+# Rider / JetBrains
+.idea/
+
+# Other IDEs
+*.swp
+
+# Secrets and API keys
+*.env
+.env.*
+secret.json
+secrets.json
+*.key
+*.pem
+*.pfx
+*.cer
+*.crt
+*.config
