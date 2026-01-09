@@ -13,10 +13,6 @@ obj/
 *.dbmdl
 *.jfm
 
-# NuGet packages
-*.nupkg
-packages/
-*.snupkg
 
 # Logs
 *.log
