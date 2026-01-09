@@ -1,3 +1,4 @@
+
 # Build folders
 bin/
 obj/
@@ -12,11 +13,6 @@ obj/
 .vs/
 *.dbmdl
 *.jfm
-
-# NuGet packages
-*.nupkg
-packages/
-*.snupkg
 
 # Logs
 *.log
@@ -42,7 +38,7 @@ Platforms/MacCatalyst/obj/
 Platforms/Windows/bin/
 Platforms/Windows/obj/
 
-# Configuration files
+# Configuration files that are safe to ignore
 appsettings.*.json
 
 # Rider / JetBrains
@@ -61,4 +57,10 @@ secrets.json
 *.pfx
 *.cer
 *.crt
-*.config
+
+# Keep these tracked (do NOT ignore)
+!packages.config
+!app.config
+!web.config
+!NuGet.Config
+
