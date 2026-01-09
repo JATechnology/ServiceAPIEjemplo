@@ -3,6 +3,9 @@
 bin/
 obj/
 
+# NuGet packages
+packages/
+
 # User-specific files
 *.user
 *.userosscache
@@ -14,10 +17,6 @@ obj/
 *.dbmdl
 *.jfm
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3689cbc617b88c004759e297bab33d973c47f9f
 # Logs
 *.log
 
@@ -67,4 +66,5 @@ secrets.json
 !app.config
 !web.config
 !NuGet.Config
+``
 
